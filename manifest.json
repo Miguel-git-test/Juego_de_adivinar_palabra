@@ -1,0 +1,17 @@
+{
+  "name": "Wordle de Íscar",
+  "short_name": "Íscar Wordle",
+  "description": "Juego de palabras sobre la Villa de Íscar",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/32/32339.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

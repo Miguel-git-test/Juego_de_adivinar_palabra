@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle de Íscar | Juego de Adivinar Palabras</title>
+    <meta name="description" content="Juego de Wordle tematizado con la cultura, sitios y personas de la Villa de Íscar.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+</head>
+<body>
+
+    <header>
+        <h1>Wordle de Íscar</h1>
+    </header>
+
+    <main>
+        <!-- Selection Menu -->
+        <section id="selection-menu">
+            <h2 style="margin-bottom: 0.5rem;">Explora la Villa</h2>
+            <p style="opacity: 0.7; font-size: 0.9rem;">Selecciona un concepto para empezar a jugar</p>
+            <div class="category-grid" id="category-grid">
+                <!-- Chips will be generated here -->
+            </div>
+        </section>
+
+        <!-- Game Interface -->
+        <section id="game-container">
+            <div id="grid"></div>
+            
+            <div id="keyboard">
+                <div class="keyboard-row">
+                    <button class="key" data-key="Q">Q</button>
+                    <button class="key" data-key="W">W</button>
+                    <button class="key" data-key="E">E</button>
+                    <button class="key" data-key="R">R</button>
+                    <button class="key" data-key="T">T</button>
+                    <button class="key" data-key="Y">Y</button>
+                    <button class="key" data-key="U">U</button>
+                    <button class="key" data-key="I">I</button>
+                    <button class="key" data-key="O">O</button>
+                    <button class="key" data-key="P">P</button>
+                </div>
+                <div class="keyboard-row">
+                    <button class="key" data-key="A">A</button>
+                    <button class="key" data-key="S">S</button>
+                    <button class="key" data-key="D">D</button>
+                    <button class="key" data-key="F">F</button>
+                    <button class="key" data-key="G">G</button>
+                    <button class="key" data-key="H">H</button>
+                    <button class="key" data-key="J">J</button>
+                    <button class="key" data-key="K">K</button>
+                    <button class="key" data-key="L">L</button>
+                    <button class="key" data-key="Ñ">Ñ</button>
+                </div>
+                <div class="keyboard-row">
+                    <button class="key wide" data-key="ENTER">ENTER</button>
+                    <button class="key" data-key="Z">Z</button>
+                    <button class="key" data-key="X">X</button>
+                    <button class="key" data-key="C">C</button>
+                    <button class="key" data-key="V">V</button>
+                    <button class="key" data-key="B">B</button>
+                    <button class="key" data-key="N">N</button>
+                    <button class="key" data-key="M">M</button>
+                    <button class="key wide" data-key="BACKSPACE">⌫</button>
+                </div>
+            </div>
+            
+            <button class="btn" id="back-btn" style="background: transparent; border: 1px solid var(--border-color); color: var(--text-color); margin-top: 2rem;">Volver al Menú</button>
+        </section>
+    </main>
+
+    <!-- Modal Win/Lose -->
+    <div class="modal-overlay" id="result-modal">
+        <div class="modal">
+            <h2 id="modal-title">¡Lo lograste!</h2>
+            <div id="word-badge" style="background: var(--accent); display: inline-block; padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-bottom: 1rem; font-size: 1.2rem; letter-spacing: 2px;">PALABRA</div>
+            <p id="modal-desc">Aquí va la descripción del concepto en relación a Íscar.</p>
+            <button class="btn" id="play-again">Jugar de Nuevo</button>
+        </div>
+    </div>
+
+    <script type="module" src="game.js"></script>
+</body>
+</html>

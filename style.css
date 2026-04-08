@@ -1,0 +1,300 @@
+:root {
+    --bg-color: #0f172a;
+    --text-color: #f8fafc;
+    --card-bg: #1e293b;
+    --border-color: #334155;
+    
+    --correct: #10b981;
+    --present: #f59e0b;
+    --absent: #475569;
+    
+    --key-bg: #475569;
+    --key-active: #64748b;
+    
+    --accent: #d97706; /* Wood/Golden accent */
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+header {
+    width: 100%;
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 0.1rem;
+    background: linear-gradient(to right, #fbbf24, #d97706);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 1rem;
+}
+
+/* Word Selection Menu */
+#selection-menu {
+    text-align: center;
+    width: 100%;
+    animation: fadeIn 0.5s ease;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.word-chip {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.word-chip:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(217, 119, 6, 0.3);
+}
+
+.word-chip .len {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.word-chip .cat {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Game Grid */
+#game-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+}
+
+#grid {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 1rem;
+}
+
+.tile {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: transform 0.1s ease;
+    user-select: none;
+    border-radius: 4px;
+}
+
+.tile.filled {
+    border-color: #64748b;
+    animation: pop 0.1s ease;
+}
+
+.tile.correct { background-color: var(--correct); border-color: var(--correct); }
+.tile.present { background-color: var(--present); border-color: var(--present); }
+.tile.absent { background-color: var(--absent); border-color: var(--absent); }
+
+.tile.flip {
+    animation: flip 0.6s ease forwards;
+}
+
+/* Keyboard */
+#keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin-top: auto;
+    padding-bottom: 1rem;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.key {
+    background-color: var(--key-bg);
+    border: none;
+    border-radius: 4px;
+    padding: 15px 12px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.1s ease;
+    font-size: 0.9rem;
+    flex: 1;
+    max-width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.key.wide {
+    max-width: none;
+    flex: 1.5;
+}
+
+.key:active {
+    background-color: var(--key-active);
+}
+
+.key.correct { background-color: var(--correct); }
+.key.present { background-color: var(--present); }
+.key.absent { background-color: var(--absent); }
+
+/* Modals */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1.5rem;
+}
+
+.modal {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal h2 {
+    margin-bottom: 1rem;
+    color: var(--accent);
+}
+
+.modal p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes flip {
+    0% { transform: rotateX(0); }
+    50% { transform: rotateX(90deg); }
+    100% { transform: rotateX(0); }
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.4s ease;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .tile {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    .key {
+        padding: 15px 5px;
+        font-size: 0.8rem;
+    }
+}
