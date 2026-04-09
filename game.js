@@ -29,7 +29,6 @@ function initMenu() {
         chip.className = 'word-chip';
         chip.innerHTML = `
             <span class="len">${wordObj.word.length} LETRAS</span>
-            <span class="cat">${wordObj.category}</span>
         `;
         chip.onclick = () => startGame(wordObj);
         categoryGrid.appendChild(chip);
@@ -52,7 +51,12 @@ function startGame(wordObj) {
 
 function setupGrid(length) {
     grid.innerHTML = '';
-    // Let's adjust grid size based on length
+    
+    // Adjust tile size based on length to prevent overflow
+    const containerWidth = Math.min(window.innerWidth - 40, 500);
+    const tileSize = Math.min(50, Math.floor(containerWidth / length) - 8);
+    document.documentElement.style.setProperty('--tile-size', `${tileSize}px`);
+    
     grid.style.gridTemplateColumns = `repeat(${length}, 1fr)`;
     
     for (let i = 0; i < MAX_ATTEMPTS * length; i++) {
